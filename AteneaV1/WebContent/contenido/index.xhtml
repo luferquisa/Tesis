@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+ 
+<h:head/>
+<body>
+	<div class="ui-fluid">
+		<p:graphicImage style="float:left;height:150px" value="/contenido/img/LogoAtenea.PNG" />
+		<p:graphicImage style="height:150px;float:right"  value="/contenido/img/universidadLogo.png" />
+	<div style="clear:both" ></div>
+	<center>
+	<h:form id="form" style="margin:15;width:40%	">
+    	<p:growl id="msgs" showDetail="true" />
+ 
+    	<p:panelGrid columns="2"  layout="grid">
+    		<f:facet name="header">
+	        	<p:outputLabel value="Ingreso"/>
+	    	</f:facet>
+    		<p:outputLabel value="usuario" />
+    		<p:inputText  value="#{login.usuario.user}"/>
+    		
+    		<p:outputLabel value="clave" />
+    		<p:password id="feedback" value="#{login.usuario.password}" />
+    		
+    		<f:facet name="footer">
+    			<p:commandButton  value="Login" type="submit" action="#{login.login}" />
+    			<p:commandButton  value="Registrar"  action="registrarEstudiante" />
+    		</f:facet>
+    	</p:panelGrid>
+    </h:form>
+    </center>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head />
+<body>
+	<ui:include src="./plantillas/menuEstudiante.xhtml" />
+	<h:form id="form">
+		<p:carousel numVisible="1" value="#{prueba.tareas}"
+			headerText="Prueba" var="tar" itemStyle="text-align:center"
+			responsive="true">
+			<p:panelGrid columns="1" style="width:100%;margin:10px 0px"
+				columnClasses="label,value" layout="grid"
+				styleClass="ui-panelgrid-blank">
+				<f:facet name="header">
+                Tarea #{tar.id}
+            </f:facet>
+				<h:outputText value="#{tar.texto}" escape="false" />
+
+				<p:outputLabel value="Preguntas" />
+				
+				<p:commandButton value="Auxilio" action="#{prueba.probando}" process="@this">
+						
+					</p:commandButton>
+				
+				<p:dataList value="#{prueba.preguntasTarea(tar.id)}" var="pre"
+					type="unordered" itemType="none" paginator="true" rows="5"
+					styleClass="paginated">
+					<f:facet name="header">
+		            Paginator
+		        </f:facet>
+					
+					<h:outputText value="#{pre.id}" style="display:inline-block" />
+				</p:dataList>
+			</p:panelGrid>
+		</p:carousel>
+		<p:dialog header="Pregunta" widgetVar="preguntaDialog" modal="true"
+			showEffect="blind" hideEffect="explode" resizable="false">
+			<p:outputPanel id="verpreguntas" style="text-align:center;">
+				<p:panelGrid columns="2" rendered="#{not empty prueba.preguntasel}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<h:outputText value="#{prueba.preguntasel.id}" />
+					</f:facet>
+
+					<h:outputText value="Pregunta:" />
+					<h:outputText value="#{prueba.preguntasel.pregunta}" />
+
+					<h:outputText value="Respuestas" />
+					<p:selectOneRadio id="opciones" value="">
+						<f:selectItem itemLabel="A" itemValue="" />
+						<f:selectItem itemLabel="B" itemValue="" />
+						<f:selectItem itemLabel="C" itemValue="Wii U" />
+						<f:selectItem itemLabel="D" itemValue="Wii U" />
+					</p:selectOneRadio>
+
+					<h:outputText value="A" />
+					<h:outputText value="#{prueba.preguntasel.a}" />
+
+					<h:outputText value="B" />
+					<h:outputText value="#{prueba.preguntasel.b}" />
+
+					<h:outputText value="C" />
+					<h:outputText value="#{prueba.preguntasel.c}" />
+
+					<h:outputText value="D" />
+					<h:outputText value="#{prueba.preguntasel.d}" />
+
+					<!--                 <h:outputText value="Color:" /> -->
+					<!--                 <h:outputText value="#{dataListView.selectedCar.color}" style="color:#{dataListView.selectedCar.color}"/> -->
+
+					<!--                 <h:outputText value="Price" /> -->
+					<!--                 <h:outputText value="$#{dataListView.selectedCar.price}" /> -->
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+</body>
+</html>

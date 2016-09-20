@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+ 
+<h:head/>
+<body>
+	<ui:include src="./plantillas/menu.xhtml"/>
+	<center>
+    <h:form>
+    		<h:inputHidden value="#{editartarea.tarea.id}" />
+	    <p:panelGrid columns="2" header="Crear Tarea">
+	    	 <f:facet name="header">
+	        	<p:outputLabel value="Tarea"/>
+	    	</f:facet>
+	    		
+	    		<p:outputLabel 	value="Titulo: "/>
+	    		<p:inputText value="#{editartarea.tarea.titulo}"/>
+	    		<p:outputLabel value="Text: "/>
+	    		<p:editor id="editor" widgetVar="editorWidget" value="#{editartarea.tarea.texto}" width="600" />
+	    		<p:outputLabel value="Competencia"/>
+	    		<p:selectOneMenu  value="#{editartarea.tarea.competencia}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+	            	<f:selectItems value="#{editartarea.competencias}" var="comp" itemLabel="#{comp.competencia}" itemValue="#{comp.id}" />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:row>
+		            <p:column  colspan="2" style="text-align: right">
+		                <h:commandButton value="Guardar" type="submit" action="#{editartarea.actualizarTarea}" />
+		            </p:column>
+        		</p:row>			
+	    </p:panelGrid>
+    	
+    
+    </h:form>
+    </center>
+</body>
+</html>

@@ -1,0 +1,76 @@
+ <p:panelGrid columns="2" header="Crear Tarea">
+	    	 <f:facet name="header">
+	        	<p:outputLabel value="Pruebas"/>
+	    	</f:facet>
+	    	
+	    		<p:outputLabel 	value="Selecciona una competencia: "/>
+	    		<p:selectOneMenu  value="#{prueba.compe}">
+	    			<p:ajax event="change" update="task" listener="#{prueba.tareasCompetencia}" />
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+	            	<f:selectItems value="#{prueba.competencias}" var="comp" itemLabel="#{comp.competencia}" itemValue="#{comp.id}" />
+	    		</p:selectOneMenu >
+	    		
+	    		
+	    		<p:outputLabel value="Tarea" />
+			    <p:accordionPanel id="task" value="#{prueba.tareas}" var="tar">
+			        <p:tab title="#{tar.titulo}">
+			            <h:panelGrid columns="2" cellpadding="5">             
+			            	<p:outputLabel value="Texto"/>
+			                <h:outputText value="#{tar.texto}" escape="false" />
+			                
+			                <p:outputLabel value="Preguntas"/>
+			 				  <p:dataList value="#{prueba.preguntasTarea(tar.id)}" var="pre" type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated">
+						        <f:facet name="header">
+						            Paginator
+						        </f:facet>
+						        <p:commandLink update=":form:verpreguntas" oncomplete="PF('preguntaDialog').show()" title="Ver Pregunta" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+						            <f:setPropertyActionListener value="#{pre}" target="#{prueba.preguntasel}" />
+<!-- 						            <h:outputText value="#{pre.id}" /> -->
+						        </p:commandLink>
+						        <h:outputText value="#{pre.id}" style="display:inline-block"/>
+						    </p:dataList>
+			               
+			               
+			            </h:panelGrid>
+			        </p:tab>
+			    </p:accordionPanel>	
+	    </p:panelGrid>
+    	
+    	<p:dialog header="Pregunta" widgetVar="preguntaDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="verpreguntas" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty prueba.preguntasel}" columnClasses="label,value">
+                <f:facet name="header">
+                     <h:outputText value="#{prueba.preguntasel.id}" /> 
+                </f:facet>
+ 
+                <h:outputText value="Pregunta:" />
+                <h:outputText value="#{prueba.preguntasel.pregunta}" />
+                
+                <h:outputText value="Respuestas" />
+                <p:selectOneRadio id="opciones" value="">
+		            <f:selectItem itemLabel="A" itemValue="" />
+		            <f:selectItem itemLabel="B" itemValue="" />
+		            <f:selectItem itemLabel="C" itemValue="Wii U" />
+		            <f:selectItem itemLabel="D" itemValue="Wii U" />
+		        </p:selectOneRadio>
+ 
+                <h:outputText value="A" />
+                <h:outputText value="#{prueba.preguntasel.a}" />
+                
+                <h:outputText value="B" />
+                <h:outputText value="#{prueba.preguntasel.b}" />
+                
+                <h:outputText value="C" />
+                <h:outputText value="#{prueba.preguntasel.c}" />
+                
+                <h:outputText value="D" />
+                <h:outputText value="#{prueba.preguntasel.d}" />
+ 
+<!--                 <h:outputText value="Color:" /> -->
+<!--                 <h:outputText value="#{dataListView.selectedCar.color}" style="color:#{dataListView.selectedCar.color}"/> -->
+ 
+<!--                 <h:outputText value="Price" /> -->
+<!--                 <h:outputText value="$#{dataListView.selectedCar.price}" /> -->
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>

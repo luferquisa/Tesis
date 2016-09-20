@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+ 
+<h:head/>
+<body>
+	<ui:include src="./plantillas/menu.xhtml"/>
+	<center>
+	<p:carousel value="#{listatarea.listatareas}" headerText="Tarea" var="tareas"   itemStyle="height:400px;text-align:center;overflow-y: auto;" numVisible="1" easing="easeOutBounce" style="width:70%;margin-top:100px" cricular="true">
+<!--         <h:panelGrid columns="2" style="width:100%;height:90%;overflow-y: auto;" columnClasses="label,value" > -->
+           
+ 
+            <h:outputText value="Titulo:" />
+            <h:outputText value="#{tareas.titulo}" />
+ 
+            <h:outputText value="Texto:" />
+            <h:outputText  escape="false"  value="#{tareas.texto}" />
+            
+           
+	            <p:button outcome="verTarea"   icon="ui-icon-search">
+	                <f:param value="#{tareas.id}" name="tarea"/> 
+	            </p:button>
+	            <p:button outcome="editarTarea"   icon="ui-icon-search">
+	                <f:param value="#{tareas.id}" name="tarea"/> 
+	            </p:button>
+<!--         </h:panelGrid> -->
+    </p:carousel> 
+    </center>
+</body>
+</html> 

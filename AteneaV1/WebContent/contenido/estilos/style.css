@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+.sqlDialogText {
+    display: block;
+    width: 600px; /* Optional, depends otherwise on parent. */
+    height: 300px;
+    overflow: auto;
+    color: green;
+}

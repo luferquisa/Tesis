@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions" >
+ 
+<h:head/>
+<body>
+	
+	<ui:include src="./plantillas/menu.xhtml"/>
+	<center>
+   <p:panelGrid columns="2" style="width:70%">
+   		<f:facet name="header">
+        	<p:outputLabel value="Tarea" />
+    	</f:facet>
+    	
+    	<p:outputLabel value="Titulo"/>
+    	<p:outputLabel value="#{pregunta.te.titulo}" />
+    	
+    	<p:outputLabel value="Texto"/>
+    	<p:outputLabel value="#{pregunta.te.texto}" escape="false" />
+    	
+    	<p:outputLabel value="Competencia"/>
+    	<p:outputLabel value="#{pregunta.te.competencia}" />
+    	<p:button outcome="editarTarea"   icon="ui-icon-search">
+            <f:param value="#{pregunta.te.id}" name="tarea"/> 
+        </p:button>
+   </p:panelGrid>
+   <h:form>
+   <p:carousel value="#{pregunta.listapreguntas}"  headerText="Preguntas" var="pr" style="width:70%" itemStyle="text-align:center;height:300px;overflow-y: auto;" responsive="true">
+        <p:panelGrid columns="2" style="width:70%;margin:10px 0px;height:300px;" columnClasses="label,value"  styleClass="ui-panelgrid-blank">
+            <f:facet name="header">
+                <p:outputLabel value="Pregunta #{pr.id}"/>
+            </f:facet>
+			
+            <h:outputText value="Pregunta:" />
+            <h:outputText value="#{pr.pregunta}" />
+            
+            <h:outputText value="Puntaje:" />
+            <h:outputText value="#{pr.puntaje}" />
+ 			
+ 			<h:outputText value="a:" />
+            <h:outputText value="#{pr.a}" /> 
+            
+            <h:outputText value="b:" />
+            <h:outputText value="#{pr.b}" />
+            
+            <h:outputText value="c:" />
+            <h:outputText value="#{pr.c}" />
+            
+            <h:outputText value="d:" />
+            <h:outputText value="#{pr.d}" />
+            
+            <h:outputText value="Correcta:" />
+            <h:outputText value="#{pr.correcta}" />
+        </p:panelGrid>
+          <p:commandButton id="submitButton"  	value="Editar" action="#{pregunta.pee}" onclick="PF('dlg2').show();"/>
+         <h:commandLink onclick="PF('dlg2').show();" value="Editar2">
+         <f:ajax execute="@form" render="@form" />
+    <f:setPropertyActionListener target="#{pregunta.pee}" value="#{pr}" />
+    
+</h:commandLink>
+
+        <f:facet name="footer">
+                In total there are #{fn:length(pregunta.listapreguntas)} .
+        </f:facet>
+    </p:carousel>
+     </h:form>
+     <p:commandButton  type="button" icon="fa-plus-circle" onclick="PF('dlg1').show();" />
+    </center>
+    <p:dialog header="Modal Dialog" widgetVar="dlg1" modal="true" >
+    	<h:form>
+    		<h:inputHidden value="#{pregunta.te.id}" id="hiddenId" />
+    		<p:panelGrid columns="2" header="Crear Tarea">
+	    	 <f:facet name="header">
+	        	<p:outputLabel value="Crear pregunta"/>
+	    	</f:facet>
+	    			    		
+	    		<p:outputLabel 	value="Pregunta: "/>
+	    		<p:inputText value="#{pregunta.pe.pregunta}"/>
+	    		
+	    		<p:outputLabel value="Opcion A:"/>
+	    		<p:inputText value="#{pregunta.pe.a}" />
+	    		
+	    		<p:outputLabel value="Opcion B:"/>
+	    		<p:inputText value="#{pregunta.pe.b}" />
+	    		
+	    		<p:outputLabel value="Opcion C:"/>
+	    		<p:inputText value="#{pregunta.pe.c}" />
+	    		
+	    		<p:outputLabel value="Opcion D:"/>
+	    		<p:inputText value="#{pregunta.pe.d}" />
+	    		
+	    		<p:outputLabel value="Puntaje:"/>
+	    		<p:inputText value="#{pregunta.pe.puntaje}" />
+	    		
+	    		<p:outputLabel value="Correcta:"/>
+	    		<p:selectOneMenu  value="#{pregunta.pe.correcta}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+            		<f:selectItem itemLabel="a" itemValue="a" />
+            		<f:selectItem itemLabel="b" itemValue="b" />
+            		<f:selectItem itemLabel="c" itemValue="c" />
+            		<f:selectItem itemLabel="d" itemValue="d" />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:row>
+		            <p:column  colspan="2" style="text-align: right">
+		                <h:commandButton value="Guardar" type="submit" action="#{pregunta.guardarPregunta}" />
+		            </p:column>
+        		</p:row>	
+	    	</p:panelGrid>
+    	</h:form>
+    	<h:outputText value="This is a Modal Dialog." />
+	</p:dialog>
+	
+	<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" >
+    	<h:form>
+    		<h:inputHidden value="#{pregunta.te.id}" id="hiddenId" />
+    		<p:panelGrid columns="2" header="Crear Tarea">
+	    	 <f:facet name="header">
+	        	<p:outputLabel value="Crear pregunta"/>
+	    	</f:facet>
+	    			    		
+	    		<p:outputLabel 	value="Pregunta: "/>
+	    		<p:inputText value="#{pregunta.pee.pregunta}"/>
+	    		
+	    		<p:outputLabel value="Opcion A:"/>
+	    		<p:inputText value="#{pregunta.pee.a}" />
+	    		
+	    		<p:outputLabel value="Opcion B:"/>
+	    		<p:inputText value="#{pregunta.pee.b}" />
+	    		
+	    		<p:outputLabel value="Opcion C:"/>
+	    		<p:inputText value="#{pregunta.pee.c}" />
+	    		
+	    		<p:outputLabel value="Opcion D:"/>
+	    		<p:inputText value="#{pregunta.pee.d}" />
+	    		
+	    		<p:outputLabel value="Puntaje:"/>
+	    		<p:inputText value="#{pregunta.pee.puntaje}" />
+	    		
+	    		<p:outputLabel value="Correcta:"/>
+	    		<p:selectOneMenu  value="#{pregunta.pee.correcta}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+            		<f:selectItem itemLabel="a" itemValue="a" />
+            		<f:selectItem itemLabel="b" itemValue="b" />
+            		<f:selectItem itemLabel="c" itemValue="c" />
+            		<f:selectItem itemLabel="d" itemValue="d" />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:row>
+		            <p:column  colspan="2" style="text-align: right">
+		                <h:commandButton value="Guardar" type="submit" action="#{pregunta.guardarPregunta}" />
+		            </p:column>
+        		</p:row>	
+	    	</p:panelGrid>
+    	</h:form>
+    	<h:outputText value="This is a Modal Dialog." />
+	</p:dialog>
+	
+</body>
+</html>

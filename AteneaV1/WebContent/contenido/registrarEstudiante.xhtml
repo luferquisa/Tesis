@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+ 
+<h:head/>
+<body>
+<!-- 	<ui:include src="./plantillas/menu.xhtml"/> -->
+	<center>
+    <h:form id="RegistrarEstudiante">
+    	<p:messages autoUpdate="true"/>
+	    <p:panelGrid columns="2" header="Nuevo estudiante" style="text-align:left;width:65%" layout="grid">
+	    	 <f:facet name="header">
+	        	<p:outputLabel value="Registrar Estudiante v2"/>
+	    	</f:facet>
+	    		
+	    		<p:outputLabel 	value="Nombre: "/>
+	    		<p:inputText required="true" value="#{estudiante.ee.nombre}"/>
+	    		<p:outputLabel value="Correo: "/>
+	    		<p:inputText  value="#{estudiante.ee.correo}" validatorMessage="Debe ser un correo valido de la universidad" >
+	    			<f:validateRegex pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@ucatolica*(.edu.co)$" />
+	    		</p:inputText >
+	    		
+	    		<p:outputLabel value="Password "/>
+	    		<p:password  value="#{estudiante.ue.password}"  feedback="true" />
+	    		
+	    		<p:outputLabel value="Genero"/>
+	    		<p:selectOneMenu required="true" id="Genero"  value="#{estudiante.ee.genero}">
+	    			<f:selectItem  itemLabel="Select One" itemValue="" />
+	            	<f:selectItem itemLabel="Femenino" itemValue="Femenino"  />
+	            	<f:selectItem itemLabel="Masculino" itemValue="Masculino"  />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:outputLabel value="Lugar de nacimiento "/>
+	    		<p:inputText  required="true" id="lugarNacimiento" value="#{estudiante.ee.lugar_nacimiento}" />
+	    		
+	    		<p:outputLabel for="popup" value="Fecha de nacimiento:" />
+        		<p:calendar id="popup" yearRange="1970:2000"     navigator="true" pattern="yyyy-MM-dd" value="#{estudiante.ee.fecha_nacimiento}" />
+        		
+        		<p:outputLabel value="Estrato"/>
+	    		<p:selectOneMenu id="estrato"  required="true" value="#{estudiante.ee.estato}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+	            	<f:selectItem itemLabel="1" itemValue="1"  />
+	            	<f:selectItem itemLabel="2" itemValue="2"  />
+	            	<f:selectItem itemLabel="3" itemValue="3"  />
+	            	<f:selectItem itemLabel="4" itemValue="4"  />
+	            	<f:selectItem itemLabel="5" itemValue="5"  />
+	            	<f:selectItem itemLabel="6" itemValue="6"  />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:outputLabel  value="Composicion familiar"/>
+	    		<p:selectOneMenu id="composicionFamiliar" required="true"  value="#{estudiante.ee.composicion_familiar}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+	            	<f:selectItem itemLabel="Solo madre" itemValue="1"  />
+	            	<f:selectItem itemLabel="Solo padre" itemValue="2"  />
+	            	<f:selectItem itemLabel="Ambos padres" itemValue="3"  />
+	            	<f:selectItem itemLabel="Familia extendida(Abuelos, tios, otros)" itemValue="4"  />
+	            	<f:selectItem itemLabel="Pareja" itemValue="5"  />
+	            	<f:selectItem itemLabel="Solo" itemValue="6"  />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:outputLabel value="Colegio"/>
+	    		<p:inputText id="colegio" value="#{estudiante.ee.colegio_nombre}"/>
+	    		
+	    		<p:outputLabel value="Tipo Colegio"/>
+	    		<p:selectOneMenu id="tipoColegio" required="true"  value="#{estudiante.ee.colegio_grado}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+	            	<f:selectItem itemLabel="Publico" itemValue="publico"  />
+	            	<f:selectItem itemLabel="Privado" itemValue="privado"  />
+	    		</p:selectOneMenu >
+	    		
+	    		
+	    		<p:outputLabel value="Trabaja:"/>
+	    		<p:selectOneMenu id="trabajo" required="true"  value="#{estudiante.ee.trabaja}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+	            	<f:selectItem itemLabel="Si" itemValue="1"  />
+	            	<f:selectItem itemLabel="No" itemValue="0"  />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:outputLabel value="Hijos:"/>
+	    		<p:selectOneMenu id="hijos" required="true" value="#{estudiante.ee.hijos}">
+	    			<f:selectItem itemLabel="Select One" itemValue="" />
+	            	<f:selectItem itemLabel="Si" itemValue="1"  />
+	            	<f:selectItem itemLabel="No" itemValue="0"  />
+	    		</p:selectOneMenu >
+	    		
+	    		<p:outputLabel value="Dirección "/>
+	    		<p:inputText required="true"  value="#{estudiante.ee.direccion}" />
+	    		
+	    		<p:outputLabel value="Grupo Programación "/>
+	    		<p:inputText required="true"  value="#{estudiante.ee.grupoProgramacion}" />
+	    		
+	    		<p:outputLabel for="repitente" value="Repitente" />
+		        <p:selectOneMenu id="repitente" required="true" value="#{estudiante.ee.repitente}">
+		        	<f:selectItem itemLabel="Select One" itemValue="" />
+		            <f:selectItem itemLabel="Si" itemValue="Si" />
+		            <f:selectItem itemLabel="No" itemValue="No" />
+		        </p:selectOneMenu>
+		        
+		        <p:outputLabel value="Cuantas veces ha repetido"/>
+	    		<p:inputText id="vecesRepiente" value="#{estudiante.ee.numeroRepitente}" />
+	    		<p:row>
+		            <p:column  colspan="2" style="text-align: right">
+		                <h:commandButton value="Guardar" validateClient="true" type="submit" action="#{estudiante.registrarEstudiante}" />
+		            </p:column>
+        		</p:row>			
+	    </p:panelGrid>
+    	
+    
+    </h:form>
+    </center>
+</body>
+</html>
